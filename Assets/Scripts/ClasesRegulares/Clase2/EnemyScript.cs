@@ -15,7 +15,6 @@ namespace ClasesRegulares.Clase2
         [SerializeField] private float speed;
         public string m_myName;
         [SerializeField] private Character character;
-
         [SerializeField] private bool shouldntBreak;
         [SerializeField] private float health;
         [SerializeField] private float fallingSpeed;
@@ -25,6 +24,9 @@ namespace ClasesRegulares.Clase2
         {
             var l_characterName = character.GetName();
             Debug.Log(l_characterName);
+
+            var totalDamage = damage - heal;
+            health -= totalDamage;
         }
 
 
