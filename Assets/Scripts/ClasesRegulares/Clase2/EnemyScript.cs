@@ -24,7 +24,7 @@ namespace ClasesRegulares.Clase2
         {
             var l_characterName = character.GetName();
             Debug.Log(l_characterName);
-
+            Debug.Log(l_characterName + "k");
             var totalDamage = damage - heal;
             health -= totalDamage;
         }
