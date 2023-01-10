@@ -31,6 +31,14 @@ namespace ClasesRegulares.Clase2
             Debug.Log(l_characterName + "s");
             Debug.Log(l_characterName + "s");
             Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
+            Debug.Log(l_characterName + "s");
             var totalDamage = damage - heal;
             health -= totalDamage;
         }
