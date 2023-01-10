@@ -25,6 +25,8 @@ namespace ClasesRegulares.Clase2
         {
             var sum = SumFloats(1, 2, 3, 4);
             Debug.Log(sum);
+            Debug.Log(sum);
+            Debug.Log(sum);
         }
 
         void Update()
