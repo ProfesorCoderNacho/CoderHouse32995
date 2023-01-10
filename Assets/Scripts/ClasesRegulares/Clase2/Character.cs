@@ -18,8 +18,8 @@ namespace ClasesRegulares.Clase2
 
         private void Awake()
         {
-            SetName("UnNombre");
-            SetName("UnNombre", 123);
+            SetName("OtroNombre");
+            SetName("OtroNombre", 123);
         }
         void Start()
         {
