@@ -10,6 +10,7 @@ public class CrashController : MonoBehaviour
     [SerializeField] private AudioSource crashAudio;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip jumpSound;
+
     private void Update()
     {
         Move(GetMoveVector());
