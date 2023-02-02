@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HarryController : MonoBehaviour
@@ -21,6 +22,12 @@ public class HarryController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        Cursor.visible = !hasFocus;
+        Cursor.lockState = hasFocus ? CursorLockMode.Confined : CursorLockMode.None;
     }
 
     public void ReceiveHealing(float p_healing)
