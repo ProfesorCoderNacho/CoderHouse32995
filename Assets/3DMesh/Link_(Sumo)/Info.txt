@@ -1,0 +1,1 @@
+Converted from .bmd to .dae with in-game rigging by use of the BMD plug-in for Blender by niacdoial using Blender 2.78c. Also includes a un-rigged wavefront .obj of the model.

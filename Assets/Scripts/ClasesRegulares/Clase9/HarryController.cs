@@ -1,4 +1,5 @@
 using System;
+using ClasesRegulares.Clase13;
 using UnityEngine;
 
 public class HarryController : MonoBehaviour
@@ -8,11 +9,18 @@ public class HarryController : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
     [SerializeField] private Collider myCollider;
+    [SerializeField] private Transform m_eyeView;
+    [SerializeField] private float m_raycastDistance = 10f;
+    [SerializeField] private LayerMask m_layerToCollideWith;
+    [SerializeField] private float m_explosionForce = 300f;
+    [SerializeField] private float m_explosionRadius = 6f;
+    private static float minimumHealth = 15f;
 
     private void Start()
     {
         currentHealth = maxHealth;
         myCollider = GetComponent<Collider>();
+        GameManager.instance.SetHarryController(this);
     }
 
     public void ReceiveDamage(float p_damage)
@@ -43,9 +51,33 @@ public class HarryController : MonoBehaviour
     {
         Move(GetMoveVector());
         RotateCharacter(GetRotationAmount());
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CreateRaycast();
+        }
     }
 
+    private void CreateRaycast()
+    {
+        var l_hasCollided =
+            Physics.Raycast(m_eyeView.position, m_eyeView.forward, out RaycastHit p_raycastHitInfo, m_raycastDistance,
+                m_layerToCollideWith);
 
+        if (l_hasCollided)
+        {
+            var l_exploder = p_raycastHitInfo.collider.GetComponent<IExploder>();
+            if (l_exploder != null)
+            {
+                l_exploder.Explode(m_eyeView.forward, p_raycastHitInfo.point);
+            }
+        }
+        else
+        {
+            Debug.Log("Hasn't collided with anything");
+        }
+    }
+
+    
     private void Move(Vector3 moveDir)
     {
         var transform1 = transform;
@@ -60,17 +92,17 @@ public class HarryController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Entered collision");
+        // Debug.Log("Entered collision");
     }
 
     private void OnCollisionStay(Collision collisionInfo)
     {
-        Debug.Log("Stay collision");
+        // Debug.Log("Stay collision");
     }
 
     private void OnCollisionExit(Collision other)
     {
-        Debug.Log("Exit collision");
+        // Debug.Log("Exit collision");
     }
 
     private float GetRotationAmount()
@@ -84,5 +116,11 @@ public class HarryController : MonoBehaviour
         var l_vertical = Input.GetAxis("Vertical");
 
         return new Vector3(l_horizontal, 0, l_vertical).normalized;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(m_eyeView.position, m_eyeView.forward * m_raycastDistance);
     }
 }

@@ -1,0 +1,47 @@
+Breath of the Wild stores the colors for emissives in the model itself, but instead of give you the model and have you go through the trouble of finding the color, here are the color(s) for the emissive map(s) in this model
+To use these colors on the emissive map(s), follow these instructions. Paint.net is the program I used to develop them, but just about any program should do.
+
+1a. If the emissive map is greyscale, skip to the next step
+1b. If it is not greyscale, make it as such by using the "Black and White" option or completely desaturating it
+2. create a new layer and move it to the bottom of the list
+3. fill the new layer completely with the appropriate emissive color as a solid color
+4. go to the emissive map layer and change the blending mode to "overlay"
+5. merge the layers
+6. save the new emissive map, but I personally do not recommend overwriting the old one
+7. when using the new emissive map, be sure to set it's strength or power to the appropriate emissive strength, as sometimes BotW has emissive levels that are over 1 or 255 and this will fix that issue
+
+Extra information:
+If you really want to get the color yourself, you can do so by getting 010 Editor, installing the appropriate plugin that allows for .bfres loading and follow these instructions
+
+1. load the .bfres model into 010 Editor
+2. expand "struct Dict models"
+3. expand "struct Model model"
+4. expand "struct Dict materials"
+5. expand the material that you want the color for
+6. scroll down to "struct ShaderParam shaderParams[46]", you should see "const_color0 =" and a vector4 in parentheses, that vector4 is for Red, Green, Blue and Alpha in that order, but Alpha is seldom used, so focus on the first three values
+7. for each value do this equation "255 * <the number you are processing> / <the largest of the three numbers>" and that will, after doing all three values, will give you the RGB values for the color you want, and when you use that color, use the largest of the three values as the power/strength of the emissive
+ 
+Now onto the actual colors
+
+
+item_ore_b_emm
+R: 40
+G: 2
+B: 5
+Hex Code: #280205
+Emissive strength: 1
+
+Q&A Section
+
+Q: How did you find all this out?
+A: Research, some asking on the BotW modding discord, and experimenting on my own
+
+Q: What did you use to make the render for the model?
+A: I used my primary program, Cinema 4D to import the FBX fresh from 3DS Max, and used a little setup with a modular Cycles 4D (Cinema 4D plugin) PBR material
+
+
+Credits
+
+Roket Gamer (me) - Dumping BotW, ripping the models and textures, getting the emissive colors and data, rendering the images
+ItsEasyActually, Random Taking Bush, Ploaj, Sylk - Creating the Wii U/Switch model importer for 3DS Max
+NWPlayer123 - WiiU Tools, including TexConv2
