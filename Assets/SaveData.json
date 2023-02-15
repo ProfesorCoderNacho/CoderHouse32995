@@ -1,0 +1,22 @@
+{
+  "LastCharacterPosition": {
+    "x": 2.180000066757202,
+    "y": 0.0,
+    "z": 20.959999084472658
+  },
+  "CanSprint": false,
+  "Health": 10.0,
+  "CharacterName": "Link",
+  "Superpowers": [
+    {
+      "SuperPowerName": "Nombre1",
+      "SuperPowerStrength": 10.0,
+      "SuperPowerActivated": true
+    },
+    {
+      "SuperPowerName": "Nombre2",
+      "SuperPowerStrength": 43.0,
+      "SuperPowerActivated": false
+    }
+  ]
+}

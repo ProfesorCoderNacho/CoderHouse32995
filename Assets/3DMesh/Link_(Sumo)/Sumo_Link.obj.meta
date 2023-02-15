@@ -3,7 +3,67 @@ guid: f2daead20c7e92b4998e36128a1ba851
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: al_ear_m.002
+    second: {fileID: 2100000, guid: b2a1893f6d13bb64693ad8bd2be280f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: al_eyeL_m_001.001
+    second: {fileID: 2100000, guid: 2f5be22abe56e64428ab59610cef1ad3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: al_eyeR_m_001.001
+    second: {fileID: 2100000, guid: 2a0d992e75307c5438a3b7efcf0378ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: al_eyeballL_m_001.001
+    second: {fileID: 2100000, guid: 87948a47cef58de4f993d500544c9973, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: al_eyeballR_m_001.001
+    second: {fileID: 2100000, guid: 749660b62b099e74784178e31e2b7f60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: al_face_m_001.001
+    second: {fileID: 2100000, guid: fb51eaee26b57404db1cf73d266e8b76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blS_lowbody_m.002
+    second: {fileID: 2100000, guid: af05cc1d0bb4a8243afc801552dc0e97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blS_upbody_m.002
+    second: {fileID: 2100000, guid: e4b308a1a4588ed4b8a2348f49707ad8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bl_earring_m.002
+    second: {fileID: 2100000, guid: b345f7c9fb5902742a1d1aeddb965485, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bl_hair_m.002
+    second: {fileID: 2100000, guid: 349ee8fc8d98515479419eea3ec7b3b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bl_handLA_m.002
+    second: {fileID: 2100000, guid: fee09796280cc5643b552e8ce023cf56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bl_handRA_m.002
+    second: {fileID: 2100000, guid: c38cc9cd9166a1546afcfbe1b3fc0fb4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -75,7 +135,8 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - ff0d7faf6afd5be43974156b20ea1eac
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
