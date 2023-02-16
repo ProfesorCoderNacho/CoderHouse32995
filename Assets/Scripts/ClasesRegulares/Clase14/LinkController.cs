@@ -1,113 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-
-public static class SaveKeys
-{
-    public static string REMAINING_HEALTH_KEY = "TotalHealth";
-    public static string X_POSITION_KEY = "XPosition";
-    public static string Y_POSITION_KEY = "YPosition";
-    public static string Z_POSITION_KEY = "ZPosition";
-    public static string CAN_SPRINT_KEY = "CanSprint";
-    public static string CHARACTER_NAME_KEY = "CharacterName";
-    public static string POSITION_KEY = "CharacterPosition";
-}
-
-public static class SaveDataHelper
-{
-    public static void SaveBool(bool p_boolState, string p_key)
-    {
-        PlayerPrefs.SetInt(p_key, p_boolState ? 1 : 0);
-    }
-
-    public static bool GetBool(string p_key, bool p_defaultValue)
-    {
-        var l_value = PlayerPrefs.GetInt(p_key, p_defaultValue ? 1 : 0);
-        return l_value != 0;
-    }
-
-    public static void SaveVector3(string p_key, Vector3 p_vector)
-    {
-        var l_xKey = p_key + "x";
-        var l_yKey = p_key + "y";
-        var l_zKey = p_key + "z";
-
-        PlayerPrefs.SetFloat(l_xKey, p_vector.x);
-        PlayerPrefs.SetFloat(l_yKey, p_vector.y);
-        PlayerPrefs.SetFloat(l_zKey, p_vector.z);
-    }
-
-    public static Vector3 GetVector3(string p_key, Vector3 p_defaultVector)
-    {
-        var l_xKey = p_key + "x";
-        var l_yKey = p_key + "y";
-        var l_zKey = p_key + "z";
-
-        var l_x = PlayerPrefs.GetFloat(l_xKey, p_defaultVector.x);
-        var l_y = PlayerPrefs.GetFloat(l_yKey, p_defaultVector.y);
-        var l_z = PlayerPrefs.GetFloat(l_zKey, p_defaultVector.z);
-
-        return new Vector3(l_x, l_y, l_z);
-    }
-
-    public static string SaveDataName = "/SaveData.json";
-}
-
-//
-// public class SaveData
-// {
-//     public Vector3 LastCharacterPosition;
-//     public bool CanSprint;
-//     public float Health;
-//     public string CharacterName;
-// }
-
-[Serializable]
-public struct LevelSaveData
-{
-    public int LastLevel;
-    public int LastWorld;
-}
-
-[Serializable]
-public struct SkinData
-{
-    public string NameID;
-    public Material MaterialToApply;
-}
-
-[Serializable]
-public struct SavedSkinData
-{
-    public List<SkinData> AcquiredSkinsList;
-}
-
-[Serializable]
-public struct SaveDataArray
-{
-    public List<SaveData> SaveSlots;
-}
-
-[Serializable]
-public struct SaveData
-{
-    public Vector3 LastCharacterPosition;
-    public bool CanSprint;
-    public float Health;
-    public string CharacterName;
-    public List<SuperPower> Superpowers;
-    public LevelSaveData LevelSaveData;
-}
-
-[Serializable]
-public struct SuperPower
-{
-    public string SuperPowerName;
-    public float SuperPowerStrength;
-    public bool SuperPowerActivated;
-}
 
 public class LinkController : MonoBehaviour
 {
@@ -123,8 +17,8 @@ public class LinkController : MonoBehaviour
 
     private void OnApplicationFocus(bool hasFocus)
     {
-        Cursor.visible = !hasFocus;
-        Cursor.lockState = hasFocus ? CursorLockMode.Confined : CursorLockMode.None;
+        //     Cursor.visible = !hasFocus;
+        //   Cursor.lockState = hasFocus ? CursorLockMode.Confined : CursorLockMode.None;
     }
 
     [ContextMenu("Test receive damage")]
@@ -166,6 +60,11 @@ public class LinkController : MonoBehaviour
         m_canSprint = l_saveData.CanSprint;
         transform.position = l_saveData.LastCharacterPosition;
         Debug.Log("Data loaded");
+    }
+
+    public void PrintMyName()
+    {
+        Debug.Log(m_characterName);
     }
 
     private void SaveDataJSON()
