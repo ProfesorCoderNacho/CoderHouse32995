@@ -13,5 +13,7 @@ namespace ClasesRegulares.Clase17
         public PokemonType type1;
         public PokemonType type2;
         public BaseStats baseStats;
+        public AudioClip pokemonCry;
+        public Bullet pokemonAttack;
     }
 }

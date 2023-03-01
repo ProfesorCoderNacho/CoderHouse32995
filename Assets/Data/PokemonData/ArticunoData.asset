@@ -25,3 +25,6 @@ MonoBehaviour:
     specialAttack: 95
     specialDefense: 125
     speed: 85
+  pokemonCry: {fileID: 8300000, guid: 6f1a085e60a281d4c96ff666ff2dd390, type: 3}
+  pokemonAttack: {fileID: 936701400270608038, guid: 192f2168a388e874f92cf58e5bcef226,
+    type: 3}

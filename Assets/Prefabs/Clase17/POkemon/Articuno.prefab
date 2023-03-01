@@ -2548,8 +2548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 0c31ff08ca92ce044a4bb32e1cbc8249, type: 2}
-  pokemonData: {fileID: 11400000, guid: b3311206bc78a0a4aa9a627401834d7d, type: 2}
-  nickname: 
+  _pokemonData: {fileID: 11400000, guid: b3311206bc78a0a4aa9a627401834d7d, type: 2}
 --- !u!1 &7208369035500238577
 GameObject:
   m_ObjectHideFlags: 0
