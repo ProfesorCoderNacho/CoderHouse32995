@@ -20,6 +20,7 @@ public class CanvasController : MonoBehaviour
     [SerializeField] private AudioSource m_audioSource;
     [SerializeField] private Slider m_volumeSlider;
     [SerializeField] private Slider m_pitchSlider;
+    private LinkController m_linkController;
 
     private void Awake()
     {
@@ -34,11 +35,14 @@ public class CanvasController : MonoBehaviour
         m_pitchSlider.onValueChanged.AddListener(ChangePitch);
     }
 
+    private void Update()
+    {
+      
+    }
 
     private void ChangePitch(float p_newPitch)
     {
         m_audioSource.pitch = p_newPitch;
-        
     }
 
     private void ChangeVolume(float p_newVolume)
@@ -98,5 +102,9 @@ public class CanvasController : MonoBehaviour
         // m_characterNameDisplay.text = p_newName;
         // m_characterNameDisplay.fontStyle = FontStyles.Bold;
         // m_characterNameDisplay.color = Color.blue;
+    }
+
+    public void UpdateCurrentHealth(float mCurrentHealth)
+    {
     }
 }

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using System;
+using UnityEngine.Events;
 
 public class LinkController : MonoBehaviour
 {
@@ -9,11 +10,18 @@ public class LinkController : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private Animator m_animator;
     [SerializeField] private float m_maxHealth;
-    [SerializeField] private float m_currentHealth;
     [SerializeField] private bool m_canSprint;
     [SerializeField] private string m_characterName;
     private static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
+    private HealthController m_healthController;
 
+    public UnityEvent<bool> OnLinkMoved;
+    // public event Action OnLinkMoved;
+
+    public HealthController GetHealthController()
+    {
+        return m_healthController;
+    }
 
     private void OnApplicationFocus(bool hasFocus)
     {
@@ -24,18 +32,23 @@ public class LinkController : MonoBehaviour
     [ContextMenu("Test receive damage")]
     private void ReceiveDamage()
     {
-        m_currentHealth -= 1;
+        m_healthController.ReceiveDamage(1);
+    }
+
+    [ContextMenu("Test heal damage")]
+    private void GetHeal()
+    {
+        m_healthController.HealDamage(1);
     }
 
     private void Awake()
     {
-        m_currentHealth = m_maxHealth;
+        m_healthController = new HealthController(m_maxHealth);
     }
 
     private void SaveData()
     {
         //Save data
-        PlayerPrefs.SetFloat(SaveKeys.REMAINING_HEALTH_KEY, m_currentHealth);
         SaveDataHelper.SaveVector3(SaveKeys.POSITION_KEY, transform.position);
         SaveDataHelper.SaveBool(m_canSprint, SaveKeys.CAN_SPRINT_KEY);
         PlayerPrefs.SetString(SaveKeys.CHARACTER_NAME_KEY, m_characterName);
@@ -44,7 +57,6 @@ public class LinkController : MonoBehaviour
     private void LoadData()
     {
         //Load data
-        m_currentHealth = PlayerPrefs.GetFloat(SaveKeys.REMAINING_HEALTH_KEY, m_maxHealth);
         transform.position = SaveDataHelper.GetVector3(SaveKeys.POSITION_KEY, transform.position);
         m_canSprint = SaveDataHelper.GetBool(SaveKeys.CAN_SPRINT_KEY, false);
         m_characterName = PlayerPrefs.GetString(SaveKeys.CHARACTER_NAME_KEY, string.Empty);
@@ -56,10 +68,14 @@ public class LinkController : MonoBehaviour
         var l_saveData = JsonUtility.FromJson<SaveData>(l_saveDataJson);
 
         m_characterName = l_saveData.CharacterName;
-        m_currentHealth = l_saveData.Health;
         m_canSprint = l_saveData.CanSprint;
         transform.position = l_saveData.LastCharacterPosition;
         Debug.Log("Data loaded");
+    }
+
+    public float GetCurrentHealth()
+    {
+        return m_healthController.GetCurrentHealth();
     }
 
     public void PrintMyName()
@@ -70,7 +86,6 @@ public class LinkController : MonoBehaviour
     private void SaveDataJSON()
     {
         var l_newSaveData = new SaveData();
-        l_newSaveData.Health = m_currentHealth;
         l_newSaveData.CanSprint = m_canSprint;
         l_newSaveData.CharacterName = m_characterName;
         l_newSaveData.LastCharacterPosition = transform.position;
@@ -120,6 +135,10 @@ public class LinkController : MonoBehaviour
             (moveDir.x * transform1.right + moveDir.z * transform1.forward) *
             (speed * Time.deltaTime * l_speedMultiplier);
         m_animator.SetFloat(MoveSpeed, moveDir.magnitude * speed);
+
+        var l_isMoving = moveDir != Vector3.zero;
+
+        OnLinkMoved?.Invoke(l_isMoving);
     }
 
     private void RotateCharacter(float rotateAmount)
@@ -138,5 +157,46 @@ public class LinkController : MonoBehaviour
         var l_vertical = Input.GetAxis("Vertical");
 
         return new Vector3(l_horizontal, 0, l_vertical).normalized;
+    }
+}
+
+public class HealthController
+{
+    private float m_currentHealth;
+    private float m_maxHealth;
+
+    public event Action<float> OnHealthChange;
+    public event Action OnDie;
+    public bool IsInvincible { get; }
+
+    public HealthController(float p_maxHealth)
+    {
+        m_maxHealth = p_maxHealth;
+        m_currentHealth = p_maxHealth;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return m_currentHealth;
+    }
+
+    public void ReceiveDamage(float p_currentDamage)
+    {
+        m_currentHealth -= p_currentDamage;
+        if (m_currentHealth <= 0)
+        {
+            m_currentHealth = 0;
+            OnDie?.Invoke();
+        }
+
+        OnHealthChange?.Invoke(m_currentHealth);
+    }
+
+    public void HealDamage(float p_currentHeal)
+    {
+        m_currentHealth += p_currentHeal;
+
+        //Alguien esta suscrito
+        OnHealthChange?.Invoke(m_currentHealth);
     }
 }
